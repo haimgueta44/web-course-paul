@@ -1,0 +1,375 @@
+/* עיצוב כללי בסגנון כהה */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #14141433;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+    background-color: #141414e0;
+    background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f562aaf4-5dbb-4603-a32b-6ef6c2230136/dh0w8qv-9d8ee6b2-b41a-4681-ab9b-8a227560dc75.jpg/v1/fill/w_1280,h_720,q_75,strp/the_netflix_login_background_canada_2024__by_logofeveryt_dh0w8qv-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6Ii9mL2Y1NjJhYWY0LTVkYmItNDYwMy1hMzJiLTZlZjZjMjIzMDEzNi9kaDB3OHF2LTlkOGVlNmIyLWI0MWEtNDY4MS1hYjliLThhMjI3NTYwZGM3NS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.FScrpAAFnKqBVKwe2syeiOww6mfH6avq-DRHZ_uFVNw);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+     background-repeat: no-repeat;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 4%;
+    background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(49, 49, 49));
+    /* background-color: rgb(27, 27, 27); */
+
+    position: sticky;
+    top: 0;
+    left: 0;
+    /* width: 100%; */
+    z-index: 1000;
+}
+
+.brand-logo {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+}
+
+.brand-logo img {
+    display: block;
+    width: 135px;
+    height: auto;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.left-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    /* background-color: white; */
+    text-decoration: none; 
+
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    /* transition: color 0.3s ease; */
+}
+
+.navbar a:hover {
+    color: #af9c9d;
+}
+
+main {
+    flex: 1;
+    /* padding: 20px 4%; */
+    padding: 0 160px;
+    margin-top: 40px;
+   
+}
+
+.main-footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #000;
+    font-size: 12px;
+    color: #777;
+}
+
+a{
+    text-decoration: none;
+}
+/*-----------------------------------------------------------------*/
+/*מכאן העיצוב הוא של הדף עצמו*/
+/* עיצוב כותרות סקשנים */
+
+.section-title {
+    font-size: 1.4rem;
+    color: #e5e5e5;
+    margin-bottom: 15px;
+}
+
+.feed-section {
+    margin-bottom: 50px;
+    /* padding: 0 80px; */
+    margin-top: 50px;
+}
+
+/* כרטיסיית המשך צפייה (גדולה יותר הבולטת בעין) */
+.continue-watching-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background-color: #181818;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.continue-watching-card:hover {
+    transform: scale(1.02);
+}
+
+.cw-thumbnail {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-icon-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cw-thumbnail:hover .play-icon-overlay {
+    background-color: #e50914;
+    border-color: #e50914;
+    transform: scale(1.1);
+}
+
+.play-button {
+    font-size: 24px;
+    margin-right: 4px; /* תיקון מיקום משולש הפליי */
+}
+
+.cw-details {
+    padding: 15px;
+}
+
+.cw-title {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.cw-subtitle {
+    font-size: 0.9rem;
+    color: #a3a3a3;
+}
+
+/* .btn-secondary {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #555;
+} */
+
+/* עיצוב הפיד והכרטיסיות */
+/* .feed-container {
+    padding: 40px;
+} */
+
+/* .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+} */
+
+/* .content-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    border-top: 3px solid #E50914;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+} */
+
+/* .content-card h3 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.content-card p {
+    color: #ccc;
+    font-size: 14px;
+} */
+
+/* .auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333;
+} */
+
+/* .tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    cursor: pointer;
+} */
+
+/* .tab-btn.active {
+    color: #E50914;
+    border-bottom: 2px solid #E50914;
+    font-weight: bold;
+} */
+
+/* .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+} */
+
+/* .nav-link:hover {
+    color: #E50914;
+} */
+
+/* .charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+} */
+
+/* .chart-box {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 320px;
+} */
+
+/* .chart-box h3 {
+    margin-top: 0;
+    color: #fff;
+    text-align: center;
+} */
+
+/* כפתור הצגת כל התכנים */
+.all-content-action {
+    text-align: center;
+    margin: 40px 0 60px 0;
+}
+
+.btn-all-content {
+    display: inline-block;
+    background-color: #e50914;
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-all-content:hover {
+    background-color: #f40612;
+}
+
+
+/* תצוגת קרוסלה ועיצוב כרטיסיות לסרטים מומלצים */
+
+/* 1. מיכל השורה - הופך לקרוסלה נגללת אופקית */
+.recommendations-row {
+    display: flex; /* מסדר את הסרטים בשורה אחת לרוחב */
+    gap: 20px; /* מרווח קבוע בין כרטיסיית סרט אחת לשנייה */
+    overflow-x: auto; /* מאפשר גלילה אופקית ברגע שהסרטים יוצאים מגבולות המסך */
+    padding: 15px 5px; /* מרווח פנימי קטן כדי שהצללים של הכרטיסיות לא ייחתכו */
+    
+    /* חוקי גלילה חלקים */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* גלילה סופר חלקה במסכי מגע של אייפון/אנדרואיד */
+}
+
+/* בונוס עיצובי: עיצוב פס הגלילה התחתון של הקרוסלה כדי שיהיה עדין ודק */
+.recommendations-row::-webkit-scrollbar {
+    height: 6px; /* גובה פס הגלילה האופקי */
+}
+.recommendations-row::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05); /* רקע מסלול הגלילה */
+    border-radius: 10px;
+}
+.recommendations-row::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2); /* צבע הפס הנגרר */
+    border-radius: 10px;
+}
+.recommendations-row::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* 2. כרטיסיית הסרט בתוך הקרוסלה */
+.movie-card {
+    flex: 0 0 200px; /* חובה! מונע מהסרטים להתכווץ ומקבע את רוחב הכרטיסייה ל-200 פיקסלים */
+    background-color: rgba(255, 255, 255, 0.1); /* רקע שקוף למחצה שמשתלב עם הבקגראונד */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+/* אפקט מודרני במעבר עכבר על כרטיסיית סרט */
+.movie-card:hover {
+    transform: translateY(-5px); /* קפיצה קלה למעלה */
+}
+
+/* 3. תמונת הפוסטר של הסרט */
+.movie-card img {
+    width: 100%;
+    height: 280px; /* גובה קבוע לפוסטר */
+    object-fit: cover; /* מונע מהתמונה להתעוות או להימעך */
+    display: block;
+}
+
+/* 4. אזור המידע (הטקסט) מתחת לתמונה */
+.movie-info {
+    padding: 12px;
+    color: white;
+    text-align: center;
+}
+.movie-info h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap; /* מונע מהטקסט לרדת שורה ומציג שלוש נקודות אם השם ארוך */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

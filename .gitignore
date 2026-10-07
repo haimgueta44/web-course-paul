@@ -1,0 +1,19 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# החרגת קובץ משתני הסביבה
+.env
+
+# החרגת תיקיית הבדיקות (אם כל הבדיקות נמצאות בתיקייה בשם tests)
+tests/
+e2e/
+
+# החרגת קבצי בדיקות ספציפיים (אם הם מפוזרים, למשל קבצים שמסתיימים ב-test.js)
+*.test.js
+*.spec.js

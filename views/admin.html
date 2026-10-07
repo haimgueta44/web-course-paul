@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פאנל ניהול</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <a class="brand-logo" href="/feed"><img src="/images/netflix-logo.svg" alt="Netflix"></a>
+        <div class="nav-links">
+            <a class="active" href="/feed">בית</a>
+            <a href="/contents">קטלוג</a>
+            <!-- <a href="/watch-history">היסטוריה</a> -->
+            <a href="/profilesmanage" id="manage-profiles-link" class="admin-only" style="display: none;">ניהול פרופילים</a>
+            <a href="/admin" class="admin-only" style="display: none;">ניהול תכנים</a>
+        </div>
+        <div class="left-nav">
+            <a href="#" id="logout-link">התנתק</a>
+            <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="סמל פרופיל" class="avatar"> -->
+            <a href="/edit-profile" class="avatar"></a>
+        </div>
+    </nav>
+
+    <main class="admin-main" id="admin-main">
+        <!-- ברכת שלום -->
+        <header class="admin-header">
+            <h2 class="greeting">שלום, <span id="profile-name">מנהל</span></h2>
+        </header>
+
+        <!-- <section class="netflix-panel external-service-section">
+                <h2>▣ מידע על סדרה מ־TVmaze</h2>
+                <p class="panel-description">חפשו סדרה וקבלו תקציר, דירוג ותמונה.</p>
+                <form id="external-search-form" class="search-form">
+                    <input id="external-title" type="text" placeholder="שם הסדרה" required><button type="submit">⌕ חיפוש מידע</button>
+                </form>
+                <p id="external-message" class="status-message"></p><article id="external-result" class="external-result"></article>
+        </section> -->
+
+        <div class="admin-container" dir="rtl">
+            <h1>🎬 פאנל ניהול תכנים</h1>
+
+            <section class="netflix-panel-external-service-section">
+                <h2> מידע על סדרה מ־TVmaze</h2>
+                <p class="panel-description"> כתוב שם סדרה או סרט וקבל את הפרטים לתוך טופס הוספת תוכן (באנגלית בלבד!)</p>
+                <form id="external-search-form" class="search-form">
+                    <input id="external-title" type="text" placeholder="שם הסדרה" required><button type="submit">משוך פרטי הסרט</button>
+                </form>
+                <p id="external-message" class="status-message"></p><article id="external-result" class="external-result"></article>
+            </section>
+
+        <!-- <section class="netflix-panel-external-service-section">
+                <h2>משיכת סדרה מ־ TVmaze</h2>
+                <p >חפשו סדרה והבא את המידע לתוך הטופס.</p>
+                <form id="external-search-form" class="search-form">
+                    <div class="form-group">
+                    <input id="external-title" type="text" placeholder="שם הסדרה" required>
+                    <button type="submit" class="form-buttons">⌕ חיפוש מידע</button>
+                    </div>
+                </form>
+        </section> -->
+
+
+
+    <!-- מיכל הטופס המשולב -->
+    <div class="form-wrapper">
+        <h2 id="form-add-new-content-title">➕ הוספת תוכן חדש</h2>
+        <h2 id="form-update-content-title" style="display: none;">✏️  ערוך תוכן קיים</h2>
+        <form id="content-form">
+            <!-- שדה נסתר שיחזיק את ה-ID רק בזמן עריכה -->
+            <input type="hidden" id="movie-id">
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="title-input">שם הסרט:</label>
+                    <input type="text" id="title-input" placeholder="לדוגמה: הסנדק" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rating-input">דירוג (0 עד 10):</label>
+                    <input type="number" id="rating-input" step="0.1" min="0" max="10" placeholder="9.2" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category-input">קטגוריה:</label>
+                    <!-- <select id="category-select" required>
+                        <option value="" disabled selected>בחר קטגוריה...</option>
+                        
+                        <option value="פשע">פשע</option>
+                        <option value="דרמה">דרמה</option>
+                        <option value="פעולה">פעולה</option>
+                        <option value="קומדיה">קומדיה</option>
+                        <option value="פנטזיה">פנטזיה</option>
+                        <option value="מתח">מתח</option>
+                        <option value="מדע בדיוני">מדע בדיוני</option>
+                        <option value="אנימציה">אנימציה</option>
+                    </select> -->
+                    <input type="text" id="category-input" placeholder="הכנס קטגוריה" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="releaseYear-input">שנת יציאה:</label>
+                <input type="text" id="releaseYear-input" placeholder="הכנס שנת יציאה" required>
+                
+            </div>
+
+            <div class="form-group">
+                    <label for="type-select">סרט או סדרה:</label>
+                    <select id="type-select" required>
+                        <option value="" disabled selected>בחר סוג...</option>
+                        <option value="movie">movie</option>
+                        <option value="series">series</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image-input">קישור לתמונת הפוסטר (URL):</label>
+                <input type="url" id="image-input" placeholder="https://example.com" >
+            </div>
+
+            <div class="form-group">
+                <label for="trailer-input">קישור לטריילר ביוטיוב (URL):</label>
+                <input type="url" id="trailer-input" placeholder="https://youtube.com...">
+            </div>
+
+            <div class="form-group">
+                <label for="description-input">תיאור ותקציר הסרט:</label>
+                <textarea id="description-input" rows="4" placeholder="הכנס את תקציר העלילה של הסרט..." required></textarea>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" id="submit-btn" class="btn-primary">💾 שמור תוכן</button>
+                <button type="button" id="cancel-btn" class="btn-secondary" style="display: none;">❌ ביטול עריכה</button>
+                <button type="button" id="okUpdate-btn" class="btn-secondary" style="display: none;">✅ עדכן תוכן</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- כאן למטה ממשיך החלק הקיים שלך: שורת החיפוש, המיונים וכרטיסיות הסרטים -->
+    <hr class="section-divider">
+</div>
+
+
+
+        <!-- הצגת כל התכנים קטע -->
+        <h2 class="page-title">כל התכנים באתר</h2>
+
+        <div class="controls-wrapper">
+            <!-- 1. שורת החיפוש -->
+            <input type="text" id="search-input" placeholder="חפש סרט...">
+
+            <!-- 2. סינון לפי קטגוריה -->
+            <!-- <select id="category-filter">
+                <option value="">כל הקטגוריות</option>
+                <option value="פשע">פשע</option>
+                <option value="דרמה">דרמה</option>
+                <option value="פעולה">פעולה</option>
+                <option value="קומדיה">קומדיה</option>
+                <option value="פנטזיה">פנטזיה</option>
+                <option value="מתח">מתח</option>
+                <option value="מדע בדיוני">מדע בדיוני</option>
+                <option value="אנימציה">אנימציה</option>
+            </select> -->
+
+            <select id="category-filter">
+            <option value="">כל הקטגוריות</option>
+                <!-- הקטגוריות ייטענו כאן דינמית מה-JS -->
+            </select>
+
+            <!-- 3. מיון לפי פרמטרים -->
+            <select id="sort-select">
+                <option value="rating_desc">ציון: מהגבוה לנמוך</option>
+                <option value="rating_asc">ציון: מהנמוך לגבוה</option>
+                <option value="year_desc">שנת יציאה: החדש ביותר</option>
+                <option value="year_asc">שנת יציאה: הישן ביותר</option>
+            </select>
+        </div>
+
+        <!-- מיכל הגריד הראשי - יכיל מקסימום 10 תכנים בדף (2 שורות של 5) -->
+        <div class="movies-grid" id="content-list">
+            
+            <!-- כרטיסיית תוכן לדוגמה 1 -->
+            <div class="content-card">
+                <div class="poster-wrapper">
+                    <img src="https://tmdb.org" alt="חומות של תקווה">
+                    <!-- מדבקת דירוג צפה (משתנה rating מהסכמה) -->
+                    <div class="rating-badge">⭐ 9.3</div>
+                </div>
+                <div class="card-details">
+                    <!-- קטגוריית הסרט (משתנה category מהסכמה) -->
+                    <span class="category-tag">דרמה</span>
+                    <!-- כותרת ושנת יציאה (title ו-releaseYear) -->
+                    <h4 class="content-title">חומות של תקווה</h4>
+                    <p class="release-year">שנת יציאה: 1994</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- כפתורי דפדוף בעמודים (Pagination) -->
+        <div class="pagination">
+            <button class="page-btn" id="prev-btn" onclick="changePage(-1)">הקודם</button>
+            <button class="page-btn active" id="page-info">1/5</button>
+            <!-- <button class="page-btn">2</button> -->
+            <button class="page-btn" id="next-btn" onclick="changePage(1)">הבא</button>
+        </div>
+        
+
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 StreamFlix - פרויקט גמר פיתוח אפליקציות אינטרנטיות</p>
+    </footer>
+
+    <script src="/js/admin.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

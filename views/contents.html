@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קטלוג התכנים</title>
+    <link rel="stylesheet" href="/css/contents.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a class="brand-logo" href="/feed"><img src="/images/netflix-logo.svg" alt="Netflix"></a>
+        <div class="nav-links">
+            <a class="active" href="/feed">בית</a>
+            <a href="/contents">קטלוג</a>
+            <!-- <a href="/watch-history">היסטוריה</a> -->
+            <a href="/profilesmanage" id="manage-profiles-link" class="admin-only" style="display: none;">ניהול פרופילים</a>
+            <a href="/admin" class="admin-only" style="display: none;">ניהול תכנים</a>
+        </div>
+        <div class="left-nav">
+            <a href="#" id="logout-link">התנתק</a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="סמל פרופיל" class="avatar">
+        </div>
+    </nav>
+
+    <main class="contents-main">
+        <!-- ברכת שלום -->
+        <header class="feed-header">
+            <h2 class="greeting">שלום, <span id="profile-name">אורח</span></h2>
+        </header>
+
+        <h2 class="page-title">כל התכנים באתר</h2>
+
+        <div class="controls-wrapper">
+            <!-- 1. שורת החיפוש -->
+            <input type="text" id="search-input" placeholder="חפש סרט...">
+
+            <!-- 2. סינון לפי קטגוריה -->
+            <!-- <select id="category-filter">
+                <option value="">כל הקטגוריות</option>
+                <option value="פשע">פשע</option>
+                <option value="דרמה">דרמה</option>
+                <option value="פעולה">פעולה</option>
+                <option value="קומדיה">קומדיה</option>
+                <option value="פנטזיה">פנטזיה</option>
+                <option value="מתח">מתח</option>
+                <option value="מדע בדיוני">מדע בדיוני</option>
+                <option value="אנימציה">אנימציה</option>
+            </select> -->
+
+            <select id="category-filter">
+            <option value="">כל הקטגוריות</option>
+                <!-- הקטגוריות ייטענו כאן דינמית מה-JS -->
+            </select>
+
+            <!-- 3. מיון לפי פרמטרים -->
+            <select id="sort-select">
+                <option value="rating_desc">ציון: מהגבוה לנמוך</option>
+                <option value="rating_asc">ציון: מהנמוך לגבוה</option>
+                <option value="year_desc">שנת יציאה: החדש ביותר</option>
+                <option value="year_asc">שנת יציאה: הישן ביותר</option>
+            </select>
+        </div>
+
+        <!-- מיכל הגריד הראשי - יכיל מקסימום 10 תכנים בדף (2 שורות של 5) -->
+        <div class="movies-grid" id="content-list">
+            
+            <!-- כרטיסיית תוכן לדוגמה 1 -->
+            <div class="content-card">
+                <div class="poster-wrapper">
+                    <img src="https://tmdb.org" alt="חומות של תקווה">
+                    <!-- מדבקת דירוג צפה (משתנה rating מהסכמה) -->
+                    <div class="rating-badge">⭐ 9.3</div>
+                </div>
+                <div class="card-details">
+                    <!-- קטגוריית הסרט (משתנה category מהסכמה) -->
+                    <span class="category-tag">דרמה</span>
+                    <!-- כותרת ושנת יציאה (title ו-releaseYear) -->
+                    <h4 class="content-title">חומות של תקווה</h4>
+                    <p class="release-year">שנת יציאה: 1994</p>
+                </div>
+            </div>
+
+            <!-- הערה לפיתוח: ה-JavaScript ישכפל את ה-HTML של ה-content-card עבור 10 פריטים בדף -->
+
+        </div>
+
+        <!-- כפתורי דפדוף בעמודים (Pagination) -->
+        <div class="pagination">
+            <button class="page-btn" id="prev-btn" onclick="changePage(-1)">הקודם</button>
+            <button class="page-btn active" id="page-info">1/5</button>
+            <!-- <button class="page-btn">2</button> -->
+            <button class="page-btn" id="next-btn" onclick="changePage(1)">הבא</button>
+        </div>
+        
+        
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 StreamFlix - פרויקט גמר פיתוח אפליקציות אינטרנטיות</p>
+    </footer>
+
+    <script src="/js/contents.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

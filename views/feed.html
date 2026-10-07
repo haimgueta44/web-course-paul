@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הפיד שלי</title>
+    <link rel="stylesheet" href="/css/feed.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a class="brand-logo" href="/feed"><img src="/images/netflix-logo.svg" alt="Netflix"></a>
+        <div class="nav-links">
+            <a class="active" href="/feed">בית</a>
+            <a href="/contents">קטלוג</a>
+            <!-- <a href="/watch-history">היסטוריה</a> -->
+            <a href="/profilesmanage" id="manage-profiles-link" class="admin-only" style="display: none;">ניהול פרופילים</a>
+            <a href="/admin" class="admin-only" style="display: none;">ניהול תכנים</a>
+        </div>
+        <div class="left-nav">
+            <a href="#" id="logout-link">התנתק</a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="סמל פרופיל" class="avatar">
+        </div>
+    </nav>
+
+    <main class="feed-main">
+        <!-- ברכת שלום -->
+        <header class="feed-header">
+            <h2 class="greeting">שלום, <span id="profile-name">אורח</span></h2>
+        </header>
+
+        <!-- המשך צפייה (התוכן האחרון שנצפה) -->
+        <section class="feed-section">
+            <h3 class="section-title">המשך לצפות</h3>
+            <div class="continue-watching-card">
+                <!-- תמונת רקע מדמה טריילר/תמונת סרט -->
+                <div class="cw-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop');">
+                    <div class="play-icon-overlay">
+                        <!-- <span class="play-button">▶</span> -->
+                    </div>
+                </div>
+                <div class="cw-details">
+                    <h4 class="cw-title">שם הסרט האחרון</h4>
+                    <p class="cw-subtitle">עצרת לפני יומיים • סרט פעולה</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- המלצות צפייה -->
+        <section class="feed-section">
+            <h3 class="section-title">מומלץ עבורך</h3>
+            <div class="recommendations-row" id="recommendations-row">
+                
+            </div>
+        </section>
+        <section class="feed-section">
+            <h3 class="section-title"> היסטורית הצפייה שלך</h3>
+            <div class="recommendations-row" id="watch-history-row">
+                
+            </div>
+        </section>
+
+        <!-- כפתור מעבר לכל התכנים -->
+        <div class="all-content-action">
+            <a href="/contents" class="btn-all-content">לכל התכנים</a>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 StreamFlix - פרויקט גמר פיתוח אפליקציות אינטרנטיות</p>
+    </footer>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/feed.js"></script>
+</body>
+</html>

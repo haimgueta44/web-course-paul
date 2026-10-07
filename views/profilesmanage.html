@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פאנל ניהול</title>
+    <link rel="stylesheet" href="/css/profilesmanage.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <a class="brand-logo" href="/feed"><img src="/images/netflix-logo.svg" alt="Netflix"></a>
+        <div class="nav-links">
+            <a class="active" href="/feed">בית</a>
+            <a href="/contents">קטלוג</a>
+            <!-- <a href="/watch-history">היסטוריה</a> -->
+            <a href="/profilesmanage" id="manage-profiles-link" class="admin-only" style="display: none;">ניהול פרופילים</a>
+            <a href="/admin" class="admin-only" style="display: none;">ניהול תכנים</a>
+        </div>
+        <div class="left-nav">
+            <a href="#" id="logout-link">התנתק</a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="סמל פרופיל" class="avatar">
+        </div>
+    </nav>
+
+    <main class="admin-container" id="admin-main">
+        <!-- כותרת ראשית לעמוד -->
+        <h1 class="page-title">👥 פאנל ניהול פרופילים ומשתמשים</h1>
+
+        <!-- טופס הוספה / עריכה של פרופיל -->
+        <div class="form-wrapper">
+            <h2 id="form-title">➕ הוספת פרופיל חדש</h2>
+            
+            <form id="profile-form">
+                <!-- שדה נסתר לשמירת ה-ID של הפרופיל בזמן עריכה -->
+                <input type="hidden" id="profile-id">
+
+                <div class="form-grid">
+                    <!-- שם הפרופיל -->
+                    <div class="form-group">
+                        <label for="name-input">שם הפרופיל / המשתמש:</label>
+                        <input type="text" id="name-input" placeholder="לדוגמה: ישראל ישראלי" required>
+                    </div>
+
+                    <!-- אימייל -->
+                    <div class="form-group">
+                        <label for="email-input">כתובת אימייל:</label>
+                        <input type="email" id="email-input" placeholder="example@streamflix.com" required>
+                    </div>
+
+                    <!-- הרשאה -->
+                    <div class="form-group">
+                        <label for="password-input"> סיסמה:</label>
+                        <input type="password" id="password-input" placeholder="בחר סיסמה" required>
+                    </div>
+
+                    <!-- הרשאה -->
+                    <div class="form-group">
+                        <label for="role-select">רמת הרשאה:</label>
+                        <select id="role-select" required>
+                            <option value="" disabled selected>בחר הרשאה...</option>
+                            <option value="profile">profile (משתמש רגיל)</option>
+                            <option value="admin">Admin (מנהל מערכת)</option>
+                            <!-- <option value="admin">Admin (מנהל מערכת)</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- כפתורי פעולה לטופס -->
+                <div class="form-buttons">
+                    <button type="submit" id="submit-btn" class="btn-primary">💾 שמור פרופיל</button>
+                    <button type="button" id="okUpdate-btn" class="btn-primary" style="display: none; background-color: #0acf45;">✅ עדכן פרופיל</button>
+                    <button type="button" id="cancel-btn" class="btn-secondary" style="display: none;">❌ ביטול עריכה</button>
+                </div>
+            </form>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- שורת בקרת חיפוש וסינון לפרופילים -->
+        <h2 class="page-title">כל הפרופילים באתר</h2>
+        <div class="controls-wrapper">
+            <input type="text" id="search-input" placeholder="🔍 חפש לפי שם, מייל או הרשאה...">
+            
+            <select id="role-filter">
+                <option value="">כל ההרשאות</option>
+                <option value="user">User (משתמשים)</option>
+                <option value="admin">Admin (מנהלים)</option>
+            </select>
+        </div>
+
+        <!-- מיכל הגריד שבו יוזרקו כרטיסיות הפרופילים דינמית -->
+        <div class="profiles-grid" id="profile-list">
+            <!-- כרטיסיות פרופיל ייווצרו כאן באמצעות ה-JavaScript -->
+        </div>
+
+        <!-- מערכת ניווט עמודים (Pagination) -->
+        <div class="pagination">
+            <button class="page-btn" id="prev-btn" onclick="changePage(-1)">הקודם</button>
+            <span id="page-info" style="align-self: center; margin: 0 10px; font-weight: bold;">1/1</span>
+            <button class="page-btn" id="next-btn" onclick="changePage(1)">הבא</button>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 StreamFlix - פרויקט גמר פיתוח אפליקציות אינטרנטיות</p>
+    </footer>
+
+    <script src="/js/profilemanage2.js"></script>
+    <script src="/js/auth.js"></script>
+    <!-- <script src="/js/admin.js"></script> -->
+</body>
+</html>

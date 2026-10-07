@@ -1,0 +1,356 @@
+// קוד מסך הקטלוג: מציג, מחפש ומנהל CRUD של תכנים בהתאם להרשאת המשתמש.
+
+/** טוענת תכנים מהכתובת שנשלחה ובונה את כרטיסי הקטלוג; ברירת המחדל היא כל התכנים. */
+// async function loadContents(url = '/api/contents') {
+//     console.log("Loading contents from URL:", url); // Debugging line
+
+//     // const message = document.getElementById('message');
+//     const contentList = document.getElementById('content-list');
+
+//     try {
+//         contentList.innerHTML = '';
+//         const response = await fetch(url);
+
+//         if (!response.ok) {
+//             throw new Error();
+//         }
+
+//         const contents = await response.json();
+
+//         const moviesHTML = contents.map(movie => {
+//             return `
+//                 <div class="content-card">
+//                     <div class="poster-wrapper">
+//                         <img src="${movie.imageUrl}" alt="${movie.title}">
+//                         <div class="rating-badge">⭐ ${movie.rating}</div>
+//                     </div>
+//                     <div class="card-details">
+//                         <span class="category-tag">${movie.category}</span>
+//                         <h4 class="content-title">${movie.title}</h4>
+//                         <p class="release-year">שנת יציאה: ${movie.releaseYear}</p>
+//                     </div>
+//                 </div>
+//             `;
+//         }).join(''); // מחבר את כל ה-HTML למחרוזת אחת גדולה
+
+//         // 3. הזרקת ה-HTML הדינמי לתוך המיכל בעמוד
+//         contentList.innerHTML = moviesHTML;
+
+//     //     if (contents.length === 0) {
+//     //         message.textContent = url.includes('/search')
+//     //             ? 'לא נמצאו תכנים מתאימים.'
+//     //             : 'עדיין אין תכנים בקטלוג.';
+//     //         return;
+//     //     }
+
+//     //     message.textContent = '';
+
+//     //     contents.forEach(content => {
+//     //         const card = document.createElement('article');
+//     //         card.className = 'content-card';
+
+//     //         const image = document.createElement('img');
+//     //         image.src = content.imageUrl;
+//     //         image.alt = content.title;
+
+//     //         const title = document.createElement('h2');
+//     //         title.textContent = content.title;
+
+//     //         const details = document.createElement('p');
+//     //         details.textContent = `${content.category} | ${content.releaseYear} | ${content.rating}/10`;
+
+//     //         const description = document.createElement('p');
+//     //         description.className = 'content-description';
+//     //         description.textContent = content.description;
+
+//     //         const trailerLink = document.createElement('a');
+//     //         trailerLink.className = 'trailer-link';
+//     //         trailerLink.href = content.videoUrl;
+//     //         trailerLink.target = '_blank';
+//     //         trailerLink.rel = 'noopener noreferrer';
+//     //         trailerLink.textContent = 'צפייה בטריילר';
+
+//     //         const editButton = document.createElement('button');
+//     //         editButton.className = 'edit-button';
+//     //         editButton.textContent = 'עריכה';
+
+//     //         // לחיצה על עריכה מעתיקה את נתוני הכרטיס לטופס.
+//     //         editButton.addEventListener('click', () => {
+//     //             startEditing(content);
+//     //         });
+
+//     //         const deleteButton = document.createElement('button');
+//     //         deleteButton.className = 'delete-button';
+//     //         deleteButton.textContent = 'מחיקה';
+
+//     //         // לחיצה על מחיקה מבקשת אישור ושולחת DELETE לשרת.
+//     //         deleteButton.addEventListener('click', async () => {
+//     //             if (!confirm('האם למחוק את התוכן?')) {
+//     //                 return;
+//     //             }
+
+//     //             try {
+//     //                 const response = await fetch(`/api/contents/${content._id}`, {
+//     //                     method: 'DELETE'
+//     //                 });
+
+//     //                 if (!response.ok) {
+//     //                     throw new Error();
+//     //                 }
+
+//     //                 await loadContents();
+//     //                 message.textContent = 'התוכן נמחק בהצלחה.';
+//     //             } catch (error) {
+//     //                 message.textContent = 'לא ניתן למחוק את התוכן.';
+//     //             }
+//     //         });
+
+//     //         card.append(image, title, details, description, trailerLink);
+
+//     //         if (currentUserRole === 'admin') {
+//     //             card.append(editButton, deleteButton);
+//     //         }
+
+//     //         contentList.appendChild(card);
+//     //     });
+//     console.log("Contents loaded successfully:", contents); // Debugging line
+//     } catch (error) {
+//         message.textContent = 'לא ניתן לטעון את התכנים.';
+//     }
+// }
+// loadContents();
+
+// const contentForm = document.getElementById('content-form');
+// const contentManagement = document.getElementById('content-management');
+// const searchForm = document.getElementById('search-form');
+// const searchTitle = document.getElementById('search-title');
+// const clearSearchButton = document.getElementById('clear-search-button');
+// const formTitle = document.getElementById('form-title');
+// const submitButton = document.getElementById('submit-button');
+// const cancelEditButton = document.getElementById('cancel-edit-button');
+// let editingContentId = null;
+// let currentUserRole = null;
+
+// /** טוענת את הרשאת המשתמש ומציגה את טופס ניהול התוכן רק למנהל. */
+// async function loadCurrentUser() {
+//     const response = await fetch('/api/auth/me');
+
+//     if (response.ok) {
+//         const user = await response.json();
+//         currentUserRole = user.role;
+//         contentManagement.hidden = user.role !== 'admin';
+//     }
+// }
+
+// /** מעבירה את טופס התוכן למצב עריכה וממלאת אותו בנתוני הכרטיס שנבחר. */
+// function startEditing(content) {
+//     editingContentId = content._id;
+//     document.getElementById('title').value = content.title;
+//     document.getElementById('description').value = content.description;
+//     document.getElementById('category').value = content.category;
+//     document.getElementById('type').value = content.type;
+//     document.getElementById('releaseYear').value = content.releaseYear;
+//     document.getElementById('rating').value = content.rating;
+//     document.getElementById('videoUrl').value = content.videoUrl;
+//     document.getElementById('imageUrl').value = content.imageUrl;
+//     document.getElementById('address').value = content.address || '';
+
+//     formTitle.textContent = 'עריכת תוכן';
+//     submitButton.textContent = 'שמירת שינויים';
+//     cancelEditButton.hidden = false;
+//     contentForm.scrollIntoView({ behavior: 'smooth' });
+// }
+
+// /** מסיימת מצב עריכה, מאפסת את הטופס ומחזירה אותו למצב הוספה. */
+// function stopEditing() {
+//     editingContentId = null;
+//     contentForm.reset();
+//     formTitle.textContent = 'הוספת תוכן';
+//     submitButton.textContent = 'הוספה';
+//     cancelEditButton.hidden = true;
+// }
+
+// // ביטול מחזיר את טופס התוכן למצב הוספה.
+// cancelEditButton.addEventListener('click', stopEditing);
+
+// // שליחת טופס החיפוש טוענת תכנים לפי שם ללא רענון הדף.
+// searchForm.addEventListener('submit', event => {
+//     event.preventDefault();
+//     const title = searchTitle.value.trim();
+
+//     if (title) {
+//         loadContents(`/api/contents/search?title=${encodeURIComponent(title)}`);
+//     }
+// });
+
+// // ניקוי החיפוש מחזיר את כל תכני הקטלוג.
+// clearSearchButton.addEventListener('click', () => {
+//     searchForm.reset();
+//     loadContents();
+// });
+
+// // אותו טופס שולח POST בהוספה או PUT כאשר קיים id לעריכה.
+// contentForm.addEventListener('submit', async event => {
+//     event.preventDefault();
+
+//     const formMessage = document.getElementById('form-message');
+//     const content = {
+//         title: document.getElementById('title').value,
+//         description: document.getElementById('description').value,
+//         category: document.getElementById('category').value,
+//         type: document.getElementById('type').value,
+//         releaseYear: Number(document.getElementById('releaseYear').value),
+//         rating: Number(document.getElementById('rating').value) || 0,
+//         videoUrl: document.getElementById('videoUrl').value,
+//         imageUrl: document.getElementById('imageUrl').value,
+//         address: document.getElementById('address').value
+//     };
+
+//     try {
+//         const url = editingContentId ? `/api/contents/${editingContentId}` : '/api/contents';
+//         const method = editingContentId ? 'PUT' : 'POST';
+//         const successMessage = editingContentId ? 'התוכן עודכן בהצלחה.' : 'התוכן נוסף בהצלחה.';
+
+//         const response = await fetch(url, {
+//             method,
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(content)
+//         });
+
+//         if (!response.ok) {
+//             throw new Error();
+//         }
+
+//         stopEditing();
+//         formMessage.textContent = successMessage;
+//         await loadContents();
+//     } catch (error) {
+//         formMessage.textContent = editingContentId
+//             ? 'לא ניתן לעדכן את התוכן.'
+//             : 'לא ניתן להוסיף את התוכן.';
+//     }
+// });
+
+// loadCurrentUser().finally(loadContents);
+
+
+
+let currentPage = 1;
+let totalPages = 1;
+
+let searchQuery = '';
+let selectedCategory = ''; // משתנה חדש לקטגוריה
+let selectedSort = 'rating_desc'; // משתנה חדש למיון (ברירת מחדל: ציון גבוה)
+
+// url = `/api/contents?page=${currentPage}`
+async function loadContents() {
+    const url = `/api/contents?page=${currentPage}` +
+                    `&search=${encodeURIComponent(searchQuery)}` +
+                    `&category=${encodeURIComponent(selectedCategory)}` +
+                    `&sort=${selectedSort}`;
+
+    console.log("Loading contents from URL:", url); // Debugging line
+
+    // const message = document.getElementById('message');
+    const contentList = document.getElementById('content-list');
+
+    try {
+        contentList.innerHTML = '';
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error();
+        }
+
+        const contents = await response.json();
+        console.log("Contents received from server:", contents); // Debugging line
+
+
+        if (contents.contents.length === 0) {
+            contentList.innerHTML = '<p class="no-results">לא נמצאו תוצאות מתאימות.</p>';
+            document.getElementById('page-info').innerText = `עמוד 0 מתוך 0`;
+            document.getElementById('prev-btn').disabled = true;
+            document.getElementById('next-btn').disabled = true;
+            return;
+        }
+
+
+        const moviesHTML = contents.contents.map(movie => {
+            return `
+                <a href="/infoContent?id=${movie._id}" class="content-card-link">
+                    <div class="content-card" >
+                        <div class="poster-wrapper">
+                            <img src="${movie.imageUrl}" alt="${movie.title}">
+                            <div class="rating-badge">⭐ ${movie.rating}</div>
+                        </div>
+                        <div class="card-details">
+                            <span class="category-tag">${movie.category}</span>
+                            <h4 class="content-title">${movie.title}</h4>
+                            <p class="release-year">שנת יציאה: ${movie.releaseYear}</p>
+                        </div>
+                    </div>
+                </a>
+            `;
+        }).join(''); // מחבר את כל ה-HTML למחרוזת אחת גדולה
+
+        // 3. הזרקת ה-HTML הדינמי לתוך המיכל בעמוד
+        contentList.innerHTML = moviesHTML;
+
+        // עדכון משתני הניווט מהשרת
+        totalPages = contents.totalPages;
+        document.getElementById('page-info').innerText = `${currentPage}/${totalPages}`;
+
+        // נטרול כפתורים אם הגענו לקצה
+        document.getElementById('prev-btn').disabled = (currentPage === 1);
+        document.getElementById('next-btn').disabled = (currentPage === totalPages);
+    
+        console.log("Contents loaded successfully:", contents); // Debugging line
+
+
+    } catch (error) {
+        message.textContent = 'לא ניתן לטעון את התכנים.';
+    }
+}
+loadContents();
+
+function changePage(direction) {
+    currentPage += direction;
+    loadContents(); // טעינת הסרטים מחדש עבור העמוד החדש
+}
+
+
+// מאזיני אירועים לכל האלמנטים
+document.getElementById('search-input').addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    currentPage = 1; // מאפסים עמוד בכל שינוי פילטר
+    loadContents();
+})
+
+document.getElementById('category-filter').addEventListener('change', (e) => {
+    selectedCategory = e.target.value;
+    currentPage = 1;
+    loadContents();
+});
+
+document.getElementById('sort-select').addEventListener('change', (e) => {
+    selectedSort = e.target.value;
+    currentPage = 1;
+    loadContents();
+});
+
+async function loadFilters() {
+    console.log("Loading categories for filter..."); // Debugging line
+    const response = await fetch('/api/contents/categories');
+    const categories = await response.json();
+    
+    const filterSelect = document.getElementById('category-filter');
+    
+    // ניקוי ושמירה על אופציית ברירת המחדל
+    filterSelect.innerHTML = '<option value="">כל הקטגוריות</option>';
+    
+    // הזרקת הקטגוריות הדינמיות שקיימות ב-DB
+    categories.forEach(cat => {
+        filterSelect.innerHTML += `<option value="${cat}">${cat}</option>`;
+    });
+}
+loadFilters();

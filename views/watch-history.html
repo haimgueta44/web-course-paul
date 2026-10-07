@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מידע על התוכן</title>
+    <link rel="stylesheet" href="/css/infoContent.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a class="brand-logo" href="/feed"><img src="/images/netflix-logo.svg" alt="Netflix"></a>
+        <div class="nav-links">
+            <a class="active" href="/feed">בית</a>
+            <a href="/contents">קטלוג</a>
+            <a href="/watch-history">היסטוריה</a>
+            <a href="/profilesmanage" id="manage-profiles-link" class="admin-only" style="display: none;">ניהול פרופילים</a>
+            <a href="/admin" class="admin-only" style="display: none;">ניהול תכנים</a>
+        </div>
+        <div class="left-nav">
+            <a href="#" id="logout-link">התנתק</a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="סמל פרופיל" class="avatar">
+        </div>
+    </nav>
+
+    <main class="infoContent-main">
+        <div class="movie-info-container">
+            <!-- 1. שם הסרט בראש העמוד -->
+            <h1 id="movie-title" class="main-movie-title">היסטוריית הצפיה שלך</h1>
+
+            
+            <!-- 4. אזור התגובות (יווצר בהמשך) -->
+            <div class="comments-section-placeholder">
+                <!-- <h3>💬 תגובות גולשים</h3> -->
+                <!-- <p>מערכת התגובות תהיה זמינה בקרוב...</p> -->
+
+                <!-- חלון נגלל להצגת טקסט התגובות בלבד -->
+                <div id="commentsContainer" class="comments-scroll-box">
+                    <!-- כאן יופיעו התגובות באופן דינמי דרך ה-JavaScript -->
+                    <p id="noCommentsMsg" class="no-comments-msg" >אין עדיין תגובות. תהיה הראשון לכתוב!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 StreamFlix - פרויקט גמר פיתוח אפליקציות אינטרנטיות</p>
+    </footer>
+
+    <!-- <script src="/js/infoContent.js"></script> -->
+    <script src="/js/auth.js"></script>
+    
+</body>
+</html>
